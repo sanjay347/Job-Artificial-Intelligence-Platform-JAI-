@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useAIAgent } from '@/context/AIAgentContext';
 
 export default function AIAgent() {
+    const ElevenLabsConvai = 'elevenlabs-convai' as any;
     const { notifications, updateAtmosphere, addNotification } = useAIAgent();
     const [position, setPosition] = useState({ right: 20, bottom: 20 });
     const [isDragging, setIsDragging] = useState(false);
@@ -163,14 +164,14 @@ export default function AIAgent() {
             {/* Force widget to be relative and movable with this div */}
             <div className="pointer-events-auto flex flex-col items-end">
                 {/* @ts-ignore */}
-                <elevenlabs-convai
+                <ElevenLabsConvai
                     agent-id="agent_9601kgz2gfs9fg7trsaz4dqew3ep"
                     action-text="Talk with future you"
                     expand-text="Talk with future you"
                     chat-title="Talk with future you"
                     type="standalone"
                     variant="expanded"
-                ></elevenlabs-convai>
+                ></ElevenLabsConvai>
             </div>
 
             <style jsx global>{`
@@ -184,24 +185,4 @@ export default function AIAgent() {
             `}</style>
         </div>
     );
-}
-
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'elevenlabs-convai': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-                'agent-id': string;
-                'branch-id'?: string;
-                'dynamic-variables'?: string;
-                'avatar-orb-color-1'?: string;
-                'avatar-orb-color-2'?: string;
-                'action-text'?: string;
-                'expand-text'?: string;
-                'chat-title'?: string;
-                'start-call-text'?: string;
-                'variant'?: string;
-                'type'?: string;
-            }, HTMLElement>;
-        }
-    }
 }

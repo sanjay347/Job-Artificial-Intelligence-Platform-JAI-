@@ -11,9 +11,18 @@ export type Notification = {
     type: 'info' | 'success' | 'warning';
 };
 
+export type Message = {
+    id: string;
+    text: string;
+    sender: 'user' | 'agent' | 'future-me';
+    timestamp: Date;
+};
+
 type AIAgentContextType = {
     notifications: Notification[];
     unreadCount: number;
+    messages: Message[];
+    addMessage: (text: string, sender: 'user' | 'agent' | 'future-me') => void;
     addNotification: (title: string, message: string, type?: Notification['type']) => void;
     markAsRead: (id: string) => void;
     markAllAsRead: () => void;
@@ -38,9 +47,20 @@ export function AIAgentProvider({ children }: { children: ReactNode }) {
             type: 'info'
         }
     ]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [atmosphere, setAtmosphere] = useState<AIAgentContextType['atmosphere']>({ mood_theme: 'default' });
 
     const unreadCount = notifications.filter(n => !n.read).length;
+
+    const addMessage = (text: string, sender: 'user' | 'agent' | 'future-me') => {
+        const newMessage: Message = {
+            id: Date.now().toString(),
+            text,
+            sender,
+            timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, newMessage]);
+    };
 
     const addNotification = (title: string, message: string, type: Notification['type'] = 'info') => {
         setTimeout(() => {
@@ -84,6 +104,8 @@ export function AIAgentProvider({ children }: { children: ReactNode }) {
         <AIAgentContext.Provider value={{
             notifications,
             unreadCount,
+            messages,
+            addMessage,
             addNotification,
             markAsRead,
             markAllAsRead,
