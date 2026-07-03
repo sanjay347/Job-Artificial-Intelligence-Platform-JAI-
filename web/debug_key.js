@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const GOOGLE_API_KEY = "AIzaSyAI8k9tJsE_BYUdar8OZxSGplZRsXixcT8";
+const GOOGLE_API_KEY = "--";
 
 async function run() {
     console.log("Checking API Key permissions...");
