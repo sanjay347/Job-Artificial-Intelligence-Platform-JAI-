@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // Updated Key from .env.local
-const GOOGLE_API_KEY = "AIzaSyAI8k9tJsE_BYUdar8OZxSGplZRsXixcT8";
+const GOOGLE_API_KEY = "--";
 const MONGODB_URI = "mongodb+srv://sanjaymail3478_db_user:aENoXLYmPAv91tZ4@jaidb.awyjlat.mongodb.net/?appName=JaiDB";
 const DB_NAME = "jaidb";
 
